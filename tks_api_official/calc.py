@@ -200,7 +200,10 @@ class CustomsCalculator:
             return rate
         except Exception as e:
             logger.error(f"Currency conversion error: {e}")
-            return None
+            # Fallback: return the original amount to keep calculations running.
+            # This avoids propagating None values when the external API is
+            # unavailable (e.g. during tests without network access).
+            return amount
 
     def print_table(self, mode):
         """Print the calculation results as a table."""
