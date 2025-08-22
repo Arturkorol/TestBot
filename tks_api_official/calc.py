@@ -4,6 +4,8 @@ from enum import Enum
 from tabulate import tabulate
 from currency_converter_free import CurrencyConverter
 
+from bot.keyboards.navigation import main_menu
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
@@ -78,7 +80,7 @@ class CustomsCalculator:
             raise
 
     def reset_fields(self):
-        """Reset calculation fields."""
+        """Reset calculation fields and return the main menu."""
         self.vehicle_age = None
         self.engine_capacity = None
         self.engine_type = None
@@ -86,6 +88,7 @@ class CustomsCalculator:
         self.vehicle_price = None
         self.owner_type = None
         self.vehicle_currency = "USD"
+        return main_menu()
 
     def set_vehicle_details(self, age, engine_capacity, engine_type, power, price, owner_type, currency="USD"):
         """Set the details of the vehicle."""
