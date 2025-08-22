@@ -2,3 +2,5 @@ currency-converter-free
 PyYAML
 tabulate
 pytest
+
+aiogram

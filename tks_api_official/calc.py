@@ -203,6 +203,14 @@ class CustomsCalculator:
             return rate
         except Exception as e:
             logger.error(f"Currency conversion error: {e}")
+            # Fall back to simple static rates when the API is unreachable.
+            fallback_rates = {"EUR": 100.0, "USD": 90.0}
+            if currency in fallback_rates:
+                rate = amount * fallback_rates[currency]
+                logger.info(
+                    f"Used fallback rate for {currency}: {fallback_rates[currency]} RUB"
+                )
+                return rate
             return None
 
     def print_table(self, mode):
